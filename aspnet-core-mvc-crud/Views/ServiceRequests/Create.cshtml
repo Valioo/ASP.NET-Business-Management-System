@@ -1,0 +1,76 @@
+﻿@using aspnet_core_mvc_crud.Enums
+@model aspnet_core_mvc_crud.Models.ServiceRequest
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>ServiceRequest</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (User.IsInRole("Customer"))
+            {
+                            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Picture" class="control-label"></label>
+                <input asp-for="Picture" class="form-control" />
+                <span asp-validation-for="Picture" class="text-danger"></span>
+            </div>
+            }
+            @if (User.IsInRole("Admin"))
+            {
+                            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="@Model.Status" asp-items="@Html.GetEnumSelectList<Status>()" class="form-control"></select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfVisit" class="control-label"></label>
+                <input asp-for="DateOfVisit" class="form-control" />
+                <span asp-validation-for="DateOfVisit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AssignedTechnicianId" class="control-label"></label>
+                <input asp-for="AssignedTechnicianId" class="form-control" />
+                <span asp-validation-for="AssignedTechnicianId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatorId" class="control-label"></label>
+                <input asp-for="CreatorId" class="form-control" />
+                <span asp-validation-for="CreatorId" class="text-danger"></span>
+            </div>
+            }
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
